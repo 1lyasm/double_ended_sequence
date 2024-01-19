@@ -1,4 +1,6 @@
-all:
+c:
 	clang -g -Weverything -fsanitize=address src/main.c -o main
-run:
+runc:
 	./main
+py:
+	python3 src/main.py

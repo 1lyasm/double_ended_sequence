@@ -26,23 +26,29 @@ class DESequence:
     def insertl(self, item):
         self.n += 1
         self.__rgt.append(item)
+        print(f"Inserted {item} to the end")
 
     def insertf(self, item):
         self.n += 1
         self.__lft.append(item)
+        print(f"Inserted {item} to the front")
 
     def deletel(self):
         if len(self.__rgt) <= 0:
             self.rebuild([], self.n)
         self.n -= 1
-        self.__rgt.pop()
+        item = self.__rgt.pop()
+        print(f"Deleted last element {item}")
+        return item
 
     def deletef(self):
         if len(self.__lft) <= 0:
             self.__rgt.reverse()
             self.rebuild([], self.n)
         self.n -= 1
-        return self.__lft.pop()
+        item = self.__lft.pop()
+        print(f"Deleted first element {item}")
+        return item
 
     def rebuild(self, lst, n):
         if self.n <= 0:
@@ -58,8 +64,10 @@ class DESequence:
         self.rebuild(lst, n)
 
 def print_all(d):
+    print("Sequence: ", end="")
     for i in range(d.n):
         print(d.get_at(i), end=" ")
+    print("\n")
 
 def main():
     lst = [1, 2, 3, 4, 5, 6]
@@ -67,27 +75,21 @@ def main():
     print_all(d)
     for i in range(13, 20):
         d.insertl(i)
-    print("\n\n")
     print_all(d)
 
     lst = [1, 2, 3, 4, 5, 6]
     d = DESequence().build(lst, len(lst))
     for i in range(10):
         d.insertf(-i)
-    print("\n\n")
     print_all(d)
 
     for i in range(3):
         d.deletel()
-    print("\n\n")
     print_all(d)
 
     for i in range(10):
         d.deletef()
-    print("\n\n")
     print_all(d)
-
-    print("\n")
 
 if __name__ == "__main__":
     main()
